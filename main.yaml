@@ -1,0 +1,9 @@
+- name:  configure "{{ component }}"
+  become: yes
+  hosts: "{{ component }}""
+  roles:      
+  - "{{ component }}"
+
+  # so before in mongodb.yaml we used exact component name as mongodb .  sp for catalogue and all componets need to create like that again and again so we can use like tihs by creating folder and as main.yaml and keep an argument as {{ component }}  so we no need to create as mongodb.yaml again and agian for every components
+  # cpmmand line for execute it in linux server is : ansible-playbook -i inventory.ini  -e "component=mongodb" main.yaml
+  
