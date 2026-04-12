@@ -1,6 +1,10 @@
-- name: mangodb by roles
+- name:  configure "{{ component }}"
   become: yes
-  hosts: mongodb
+  hosts: "{{ component }}""
   roles:     #here we use roles insteead of tasks and here roles is a directory and we created it and and also created mongodb file there  
-  - mongodb   #so here we are saying go ansible goto roles and search for mongodb
+  - "{{ component }}"   #so here we are saying go ansible goto roles and search for mongodb
               #  so tasks were stored in roles/mongodb/tasks so in that task we kept main.yaml inthat all task were there. please check
+
+
+# first we used exact name as mongodb right So we acnm also  can keep it as argument {{ component }}
+# so the syntax in linux server will be :  
