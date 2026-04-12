@@ -1,0 +1,14 @@
+- name: disable default nodejs  
+  ansible.builtin.command: dnf module disable nodejs -y # so for disable there is any moduole in ansible  so  we use this command module because if there in no any builin module in ansible then we use this command module to run it 
+
+- name: enable nodejs:20
+  ansible.builtin.command: dnf module enable nodejs:20 -y # same as above we use command module 
+
+- name: Install nodejs
+  ansible.builtin.dnf: # for installation we use dnf if its run by redhat so we use dnf 
+    name: nodejs
+    state: present
+    
+- name: install dependencies
+  community.general.npm:
+    path: /app

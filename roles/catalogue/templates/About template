@@ -1,0 +1,6 @@
+#so here we used templates role because by using templates u can just change the changes in it by not touching the code any where and here we use jinja2 = .j2 
+#so we keep variable their for exampleads MONGO_DB HOST so we can changebthe host name whenever we by simply changing herE.
+#so we create a variables folder and keep our variable as MONGODB_HOST: mongodb.vkdevin.online
+
+#Reuse same file for multiple services
+#Easy to change values (just edit vars).

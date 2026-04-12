@@ -1,0 +1,3 @@
+MONGODB_HOST: mongodb.vkdevin.online
+
+#here we used role called vars =variables because to store all the variables here .MONGODB_HOST its was placed in templates

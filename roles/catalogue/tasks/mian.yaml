@@ -1,0 +1,40 @@
+#so here we extracted common code and kept it in folder called common in that we created a files called app-setup,nodejs, etc
+#so here we useing include-roles: means along with main.yaml it will call including roles we created.
+
+- name: app-setup
+  include_roles:
+    name: common   #folder name 
+    tasks_from: app-setup.yaml  #name of the file 
+
+- name: installing node js
+  include_roles:
+    name: common
+    tasks_from: nodejs.yaml
+    
+- name: copy mongodb repo
+  ansible.builtin.copy: # copy module to copy one from another 
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
+
+- name: install mongodb client
+  ansible.builtin.dnf:
+    name: mongodb-mongosh
+    state: present
+
+- name: check products loaded or not
+  ansible.builtin.command:
+    cmd: mongosh --host mongodb.vkdevin.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
+  register: catalogue_output
+
+- name: print catalogue output
+  ansible.builtin.debug:
+    msg: "{{ catalogue_output }}"
+
+- name: load products 
+  ansible.builtin.shell: mongosh --host mongodb.vkdevin.online < /app/db/master-data.js
+  when: catalogue_output.stdout | int < 0
+
+- name: systemctl service
+  include_roles:
+    name: common
+    tasks_from: systemctl.yaml

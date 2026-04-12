@@ -1,0 +1,26 @@
+#THIS CODE IS FOR APP SETUP
+- name: create app directory
+  ansible.builtin.file: # creating a file module
+    path: /app
+    state: directory
+
+- name: create roboshop system user
+  ansible.builtin.user: # to creat system user we use this command 
+  #manual line is : useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+    name: roboshop
+    shell: /sbin/nologin
+    system: true
+    home: /app
+
+- name: download catalogue code
+  ansible.builtin.get_url:  #its for download the url in /tmp/catalogue.zip
+    url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+    dest: /tmp/catalogue.zip
+
+# this module thinks file exist on ansible control server, needs to extract on to remote machine
+# remote_src: yes means files already exist in catalogue server
+- name: extract catalogue code
+  ansible.builtin.unarchive: #  we use this to unzip the file
+    src: /tmp/catalogue.zip
+    dest: /app
+    remote_src: yes
