@@ -1,6 +1,5 @@
 #so here we extracted common code and kept it in folder called common in that we created a files called app-setup,nodejs, etc
 #so here we useing include-roles: means along with main.yaml it will call including roles we created.
-
 - name: app-setup
   include_roles:
     name: common   #folder name 
@@ -10,7 +9,7 @@
   include_roles:
     name: common
     tasks_from: nodejs.yaml
-    
+
 - name: copy mongodb repo
   ansible.builtin.copy: # copy module to copy one from another 
     src: mongo.repo
