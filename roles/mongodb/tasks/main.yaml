@@ -1,0 +1,28 @@
+tasks:
+
+- name: copy mongodb repo
+  ansible.builtin.copy: # so Here we are copying data so we use this module 
+    src: mongo.repo #source : from where 
+    dest: /etc/yum.repos.d/mongo.repo  #dest : destination =  Copy to where.
+
+- name: Install mongodb server
+  ansible.builtin.dnf: # installation module 
+    name: mongodb-org
+    state: present # we can use present or installed both will work 
+
+- name: start and enable mongodb
+  ansible.builtin.service: # this module for  start and enable 
+    name: mongod
+    state: started
+    enabled: yes
+
+- name: allow remote connections
+  ansible.builtin.replace:  # phere we use this module to replace the  data 
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1' # existed content
+    replace: '0.0.0.0' # which we have to change 
+
+- name: restart mongodb #  restart module
+  ansible.builtin.service:
+    name: mongod
+  state: restarted 
