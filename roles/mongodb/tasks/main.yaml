@@ -1,5 +1,4 @@
 tasks:
-
 - name: copy mongodb repo
   ansible.builtin.copy: # so Here we are copying data so we use this module 
     src: mongo.repo #source : from where 
@@ -25,4 +24,4 @@ tasks:
 - name: restart mongodb #  restart module
   ansible.builtin.service:
     name: mongod
-  state: restarted 
+    state: restarted 
