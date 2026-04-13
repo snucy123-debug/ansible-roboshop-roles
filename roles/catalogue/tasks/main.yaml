@@ -36,3 +36,6 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: systemctl.yaml
+
+    #ERROR faced use include_role:  not roles  yes will keep  u iinn trouble
+    
