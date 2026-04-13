@@ -1,0 +1,10 @@
+- name: Restart nginx
+  ansible.builtin.service: 
+    name: nginx
+    state: restarted
+
+    #Handlers are special tasks that run only when something changes
+    #so why we kept this task in handlers means when we run a the playbook everytuime it restarts so our app will be messup for two minutes 
+    #so what we did here means u=we used handlers role because it runs only when we did changes like 
+    #for example we repeatedly edit nnginx.cong for to mentiion host names right so 
+    #When ever we update then only it will restart other wise it will no restart iw will be same 

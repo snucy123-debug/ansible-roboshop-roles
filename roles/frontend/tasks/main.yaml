@@ -1,0 +1,65 @@
+- name: disable default nginx
+  ansible.builtin.command: dnf module disable nginx -y
+
+- name: enable nginx
+  ansible.builtin.command: dnf module enable nginx:1.24 -y
+
+- name: install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: start and enable nginx
+  ansible.builtin.service: 
+    name: nginx
+    state: started
+    enabled: yes
+
+      # so below 4 commands  there we need to clear all the dat indie /usr/share/nginx/html everything inside it but we dont have any command to clear it so what we did we first deleted it [ 1 st command ] and then we created same directory [ 2nd command ]  and downloaded the froontend code in /tmp/frontend.zip file , and will unzip that code [4th command] into /usr/share/nginx/html this directory 
+
+- name: remove html directory   
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: create html directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: download frontend code
+  ansible.builtin.get_url:
+    url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+    dest: /tmp/frontend.zip
+
+- name: unzip frontend code
+  ansible.builtin.unarchive:
+    src: /tmp/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+
+    #BELOW THREE COMMANDS 
+    # 1. Remove default nginx.conf from server
+    # 2. Copy our custom nginx.conf from local → /etc/nginx/nginx.conf
+    # 3. RESTART NGINX
+
+- name: remove default nginx conf
+  ansible.builtin.file:
+    path: /etc/nginx/nginx.conf
+    state: absent
+
+- name: copy roboshop nginx conf
+  ansible.builtin.template: 
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    force: yes
+    notify:
+     - Restart nginx #here we used notify keyword which trigger handlers role file
+                     #we use this because whenever changes happpen in nginx.conf.j2 then notify keyword notifies too handler to restart -check handlers once
+
+
+
+  #ABOVE ON LINE : 52 and 53 we used template and change the conf file name to j2
+    #so here before we used copy but now we should use template because we stored catalouge.service file in template. and by templates we can easily do chnages in template only by using variables.
+
+   #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
