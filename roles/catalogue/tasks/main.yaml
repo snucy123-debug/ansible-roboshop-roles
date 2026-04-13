@@ -36,8 +36,10 @@
   ansible.builtin.include_role:
     name: common
     tasks_from: systemctl.yaml
-  #tags:
-     #- systemctl    #USED TAGS IF U WANT RUN FULL EXECUTION REMOVE IT
+  tags:
+     - systemctl    
+     
+    #USED TAGS IF U WANT RUN FULL EXECUTION REMOVE IT for include_ro;es commmand u need to give tags for here and ineer tasks : systemctl.yamlso u have to give there too to run tags .
 
     #ERROR faced use include_role:  not roles  yes will keep  u iinn trouble
     
