@@ -1,6 +1,5 @@
 #so here we extracted common code and kept it in folder called common in that we created a files called app-setup,nodejs, etc
 #so here we useing include-roles: means along with main.yaml it will call including roles we created.
-
 - name: app-setup
   include_roles:
     name: common   #folder name 
@@ -24,7 +23,7 @@
 - name: check products loaded or not
   ansible.builtin.command:
     cmd: mongosh --host mongodb.vkdevin.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
-  register: catalogue_output
+    register: catalogue_output
 
 - name: print catalogue output
   ansible.builtin.debug:
