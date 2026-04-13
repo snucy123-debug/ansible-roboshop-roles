@@ -2,13 +2,13 @@
 #so here we useing include-roles: means along with main.yaml it will call including roles we created.
 - name: app-setup
   include_roles:
-    name: common   #folder name 
-    tasks_from: app-setup.yaml  #name of the file 
+   name: common   #folder name 
+   tasks_from: app-setup  #name of the file 
 
 - name: installing node js
   include_roles:
     name: common
-    tasks_from: nodejs.yaml
+    tasks_from: nodejs
 
 - name: copy mongodb repo
   ansible.builtin.copy: # copy module to copy one from another 
@@ -36,4 +36,4 @@
 - name: systemctl service
   include_roles:
     name: common
-    tasks_from: systemctl.yaml
+    tasks_from: systemctl
