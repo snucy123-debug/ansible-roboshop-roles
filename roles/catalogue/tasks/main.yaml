@@ -23,7 +23,7 @@
 - name: check products loaded or not
   ansible.builtin.command:
     cmd: mongosh --host mongodb.vkdevin.online --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
-    register: catalogue_output
+  register: catalogue_output
 
 - name: print catalogue output
   ansible.builtin.debug:
