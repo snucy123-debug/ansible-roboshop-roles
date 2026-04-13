@@ -37,7 +37,7 @@
     name: common
     tasks_from: systemctl.yaml
   tags:
-    - systemctl
+     - systemctl
 
     #ERROR faced use include_role:  not roles  yes will keep  u iinn trouble
     
