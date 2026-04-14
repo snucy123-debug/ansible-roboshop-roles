@@ -20,6 +20,15 @@
      - start
 
 
+#------------------►ERROR FACED:◄-----------------------
+#See above  on line 3and 4 u just need to keep double codeds starting and end of the line 
+#Because for 3rd we  using jinja sooit will not take 
+#for 4th very important before i given as "{{ component }} " so it saved service file in  this path /etc/systemd/system/ 
+#as "user".service so it took "" also as name so i gotr error as 
+##--------------►*fatal: [user.vkdevin.online]: FAILED! => {"changed": false, "msg": "Could not find the requested service user: host"}--------------
+#so we should double codes start and end of the line  only when it comes to any copy or saving files so yes
+
+
 
 
 
