@@ -1,14 +1,16 @@
 - name: copy "{{ component }}" service
-  ansible.builtin.template:     #so here before we used copy but now we should use template because we stored catalouge.service file in template. and by templates we can easily do chnages in template only by using variables.
-    src: user.service.j2   #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
+  ansible.builtin.template:        #so here before we used copy but now we should use template because we stored catalouge.service file in template. and by templates we can easily do chnages in template only  by using variables.
+    src: user.service.j2           #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
     dest: /etc/systemd/system/catalogue.service
   tags:
      - systemctl
+
 - name: systemctl deamon reload
   ansible.builtin.systemd_service:
     daemon_reload: true
   tags:
      - systemctl
+     
 - name: start and enable "{{ component }}"
   ansible.builtin.service:
     name: "{{ component }}"
@@ -18,3 +20,7 @@
      - systemctl
 
      # so here we used tags  to run only systemctl.yaml so if u wated to run emntire catalogue service keeep tags as a comment or remove it 
+
+      #So befor in "{{ component }}" in this place we used catalogue for catalogue cofiguraition soo again when we use this code for user component then we used arugument called component so we can run by giving component name simply in command line 
+
+      #samee as app set up

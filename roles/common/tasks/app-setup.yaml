@@ -13,7 +13,7 @@
 
 - name: download "{{ component }}" code
   ansible.builtin.get_url:  #this module is for download the url in /tmp/catalogue.zip
-    url: https://roboshop-artifacts.s3.amazonaws.com/"{{ component }}"-v3.zip 
+    url: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip" 
     dest: /tmp/catalogue.zip
 
 # this module thinks file exist on ansible control server, needs to extract on to remote machine
