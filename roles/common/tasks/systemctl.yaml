@@ -10,11 +10,11 @@
     daemon_reload: true
   tags:
      - systemctl
-     
+
 - name: start and enable "{{ component }}"
   ansible.builtin.service:
     name: "{{ component }}"
-    state: started
+    state: restarted  #even app in not running we can restart
     enabled: yes
   tags:
      - systemctl
