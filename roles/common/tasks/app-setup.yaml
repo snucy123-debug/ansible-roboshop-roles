@@ -14,16 +14,18 @@
 - name: download "{{ component }}" code
   ansible.builtin.get_url:      #this module is for download the url in /tmp/catalogue.zip
     url: "https://roboshop-artifacts.s3.amazonaws.com/{{ component }}-v3.zip"
-    dest: /tmp/"{{ component }}".zip
+    dest: /tmp/{{ component }}.zip
 
 # this module thinks file exist on ansible control server, needs to extract on to remote machine
 # remote_src: yes means files already exist in catalogue server
 - name: extract "{{ component }}" code
   ansible.builtin.unarchive: #  we use this to unzip the file
-    src: /tmp/"{{ component }}".zip
+    src: /tmp/{{ component }}.zip
     dest: /app
     remote_src: yes
-    
+  tags:
+    -app
+        
 
 
     #So befor in "{{ component }}" in this place we used catalogue for catalogue cofiguraition soo again when we use this code for user component then we used arugument called component so we can run by giving component name simply in command line 
