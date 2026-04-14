@@ -53,9 +53,9 @@
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
     force: yes
-    notify:
-     - Restart nginx #here we used notify keyword which trigger handlers role file
-                     #we use this because whenever changes happpen in nginx.conf.j2 then notify keyword notifies too handler to restart -check handlers once
+  notify:
+      - Restart nginx     #here we used notify keyword which trigger handlers role file
+                          #we use this because whenever changes happpen in nginx.conf.j2 then notify keyword notifies too handler to restart -check handlers once
 
 
 
