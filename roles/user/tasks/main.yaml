@@ -14,8 +14,8 @@
   ansible.builtin.include_role:
     name: common   #folder name 
     tasks_from: systemctl.yaml
-  tags:
-    - start
-
+  #tags:
+    #- start
+    
 
     #above three are common for catalogue and user so we kept this code in common folder.
