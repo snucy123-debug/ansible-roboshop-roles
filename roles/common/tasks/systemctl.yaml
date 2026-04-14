@@ -3,13 +3,13 @@
     src: user.service.j2           #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
     dest: /etc/systemd/system/catalogue.service
   tags:
-     - systemctl
+    - start
 
 - name: systemctl deamon reload
   ansible.builtin.systemd_service:
     daemon_reload: true
   tags:
-     - systemctl
+      - start
 
 - name: start and enable "{{ component }}"
   ansible.builtin.service:
@@ -17,7 +17,15 @@
     state: restarted  #even app in not running we can restart
     enabled: yes
   tags:
-     - systemctl
+     - start
+
+
+
+
+
+
+
+
 
      # so here we used tags  to run only systemctl.yaml so if u wated to run emntire catalogue service keeep tags as a comment or remove it 
 
