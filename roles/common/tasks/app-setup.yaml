@@ -23,9 +23,8 @@
     src: /tmp/{{ component }}.zip
     dest: /app
     remote_src: yes
-  tags:
-    -app
-        
+  
+
 
 
     #So befor in "{{ component }}" in this place we used catalogue for catalogue cofiguraition soo again when we use this code for user component then we used arugument called component so we can run by giving component name simply in command line 
