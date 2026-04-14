@@ -3,10 +3,10 @@
     name: common
     tasks_from: app-setup.yaml
 
-- name: maven-setup
+- name: python-setup
   ansible.builtin.include_role:
     name: common
-    tasks_from: maven.yaml
+    tasks_from: python.yaml
 
 
 - name: systemctl
