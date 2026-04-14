@@ -1,0 +1,17 @@
+
+  - name: install python3 packages
+    ansible.builtin.dnf:
+      name: "{{ item }}"
+      state: installed
+    loop:          # here we used loop formate to install all 3 at a time that makes less code/lines.
+    - python3 
+    - gcc 
+    - python3-devel
+
+    - name: install dependencies
+    ansible.builtin.pip:
+      requirements: requirements.txt
+      executable: pip3.9
+    args:
+      chdir: /app
+
