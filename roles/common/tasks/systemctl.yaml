@@ -1,7 +1,7 @@
 - name: copy "{{ component }}" service
   ansible.builtin.template:        #so here before we used copy but now we should use template because we stored catalouge.service file in template. and by templates we can easily do chnages in template only  by using variables.
-    src: user.service.j2           #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
-    dest: /etc/systemd/system/catalogue.service
+    src: "{{ component }}".service.j2           #here we should use  catalogue.service.j2  --.j2 because we are using jinja2 there and the file name also catalogue.service.j2 so.
+    dest: /etc/systemd/system/"{{ component }}".service
   tags:
     - start
 
